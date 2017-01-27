@@ -1,0 +1,11 @@
+<div class="well well-lg">
+  <div class="article-title">
+    <%= link_to @article.title, @article %>
+    <div class="glyphicon glyphicon-calendar" id="article-date">
+      <%= @article.created_at.strftime("%b/%d/%y") %>
+    </div>
+  </div>
+  <div class="article-body">
+    <%= @article.body %>
+  </div>
+</div>
