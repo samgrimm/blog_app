@@ -25,6 +25,8 @@ gem 'coffee-rails', '~> 4.2'
 
 gem 'rake', '< 11.0'
 
+gem 'devise', '~>4.2.0'
+
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
