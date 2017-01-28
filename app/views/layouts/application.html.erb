@@ -27,16 +27,24 @@
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
               <li class="active"><%= link_to "Authors", "#" %></li>
-              <li><%= link_to "Sign Up", new_user_registration_path %></li>
-              <li><a href="#">Link</a></li>
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="#">Edit Profile</a></li>
-                  <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
 
-                </ul>
-              </li>
+              <% if user_signed_in? %>
+                <p class="navbar-text">
+                  Signed in as <%= current_user.email %>
+                </p>
+                <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profile <span class="caret"></span></a>
+                  <ul class="dropdown-menu">
+                    <li><a href="#">Edit Profile</a></li>
+                    <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+
+                  </ul>
+                </li>
+              <% else %>
+                <li><%= link_to "Sign Up", new_user_registration_path %></li>
+                <li><%= link_to "Sign in", new_user_session_path %></li>
+              <% end %>
+              <li><a href="#">Link</a></li>
             </ul>
           </div>
         </div>
