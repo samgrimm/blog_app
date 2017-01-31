@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
+  before_action :get_current_user, only: [:edit, :update, :destroy]
 
   def index
     @articles = Article.all
@@ -60,6 +61,14 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :body)
+  end
+
+  def get_current_user
+    unless @article.user == current_user
+      flash_message = "You are not allowed to make changes to this article"
+      flash[:alert] = flash_message
+      redirect_to root_path
+    end
   end
 
 
