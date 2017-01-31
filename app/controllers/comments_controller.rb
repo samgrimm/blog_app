@@ -9,6 +9,9 @@ class CommentsController < ApplicationController
       @comment = @article.comments.build(comment_params)
       @comment.user = current_user
       if @comment.save
+        #Using action_cable - after the comment is created we need to broadcast the comment to the action cable,
+        # and tell it how it should be rendered.
+        ActionCable.server.broadcast "comments", render(partial: 'comments/comment', object: @comment )
         flash[:notice] = "Comment has been created"
       else
         flash.now[:alert] = "Comment has not been created"
